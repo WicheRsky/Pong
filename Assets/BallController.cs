@@ -8,6 +8,7 @@ public class BallController : MonoBehaviour
     public float speed = 9;
     public Vector3 vel;
     public bool isPlaying;
+    public scoreManager scoreManager;
 
     void Start()
     {
@@ -67,11 +68,16 @@ public class BallController : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (transform.position.x > 0)
-            print("Lewy +1");
+    {      
         if (transform.position.x < 0)
-            print("Prawy +1");
+        {
+            scoreManager.IncrementLeftPlayerScore();
+        }
+        if (transform.position.x > 0)
+        {
+            scoreManager.IncrementRightPlayerScore();
+        }   
+            
         ResetBall();
     }
 }
